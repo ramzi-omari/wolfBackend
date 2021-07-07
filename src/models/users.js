@@ -43,6 +43,8 @@ const UserSchema = new Schema({
     min: 0,
     max: 5
   },
+  description: String,
+  tag: [String],
 
 }, {
   collection: 'Users',
