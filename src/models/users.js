@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   first_name: {
     type: String,
-    required: 'Enter a first name',
+    required: true,
   },
   last_name: String,
   profilePictureUrl: String,
@@ -49,6 +49,7 @@ const UserSchema = new Schema({
   type: {
     type: String,
     enum: TYPE_USERS,
+    required
   }
 
 }, {
