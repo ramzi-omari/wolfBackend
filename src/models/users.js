@@ -49,7 +49,7 @@ const UserSchema = new Schema({
   type: {
     type: String,
     enum: TYPE_USERS,
-    required
+    required: true,
   }
 
 }, {
