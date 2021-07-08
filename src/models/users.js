@@ -4,15 +4,16 @@ import jwt from 'jsonwebtoken';
 import Token from './token';
 import crypto from "crypto";
 import { JWT_SECRET } from '../config';
+import { TYPE_USERS } from '../config/constants';
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  firstName: {
+  first_name: {
     type: String,
-    required: 'Enter a first name',
+    required: true,
   },
-  lastName: String,
+  last_name: String,
   profilePictureUrl: String,
   email: {
     type: String,
@@ -20,7 +21,6 @@ const UserSchema = new Schema({
     unique: true,
   },
   birthDate: Date,
-  address: String,
   city: Number,
   phone: {
     type: String,
@@ -45,6 +45,11 @@ const UserSchema = new Schema({
   },
   description: String,
   tag: [String],
+  type: {
+    type: String,
+    enum: TYPE_USERS,
+    required: true,
+  }
 
 }, {
   collection: 'Users',
