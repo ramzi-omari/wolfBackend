@@ -23,7 +23,11 @@ const signUp = async (req, res) => {
     const savedUser = await newUser.save();
     savedUser.password = undefined;
 
-    res.status(200).json({ success: true, user: savedUser });
+    res.status(200).json({ 
+        success: true, 
+        user: savedUser, 
+        token: savedUser.generateJWT(), 
+      });
   } catch (e) {
     console.log({
       success: false,
