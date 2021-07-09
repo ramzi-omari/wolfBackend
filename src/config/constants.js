@@ -19,3 +19,9 @@ export const EMAIL_NOT_EXISTING_ML_MESSAGE = {
     fr: "Cet e-mail n'existe pas",
     ar: "هذا البريد الإلكتروني غير موجود",
 };
+
+export const UNAUTHORIZED_ACCEESS_ML_MESSAGE = {
+    en: "Unauthorized access",
+    fr: "accès non autorisé",
+    ar: "دخول غير مسموح",
+};
