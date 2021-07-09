@@ -17,8 +17,8 @@ const signUp = async (req, res) => {
       return res.status(400).json({ success: false, message: "missing required fields" });
     }
     // check if account exist
-    const user = await Users.findOne({$or :[{email},{phone}]  });
-    if (user) return res.status(400).json({ success: false, message:EMAIL_EXISTING_ML_MESSAGE });
+    const user = await Users.findOne({ $or: [{ email }, { phone }] });
+    if (user) return res.status(400).json({ success: false, message: EMAIL_EXISTING_ML_MESSAGE });
     const newUser = new Users({ ...req.body });
     const savedUser = await newUser.save();
     savedUser.password = undefined;
