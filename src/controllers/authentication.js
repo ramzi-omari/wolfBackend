@@ -1,4 +1,4 @@
-import { EMAIL_EXISTING_ML_MESSAGE, MISSING_REQUIRED_FIELDS } from '../config/constants';
+import { EMAIL_EXISTING_ML_MESSAGE, EMAIL_NOT_EXISTING_ML_MESSAGE, MISSING_REQUIRED_FIELDS } from '../config/constants';
 import Users from '../models/users';
 
 /// @route auth/signup
@@ -41,8 +41,9 @@ const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await Users.findOne({ email });
-    console.log(user);
-    if (!user) return res.status(401).json({ success: false, message: 'email not registered yet' });
+
+    if (!user) return res.status(401).json({ success: false, message: EMAIL_NOT_EXISTING_ML_MESSAGE });
+
     if (!user.comparePassword(password)) return res.status(401).json({
       success: false,
       message: 'invalid credentials'
@@ -51,7 +52,12 @@ const signIn = async (req, res) => {
     user.password = undefined;
     res.status(200).json({ success: true, token: user.generateJWT(), user });
   } catch (e) {
-    res.status(500).json({ success: false, message: e.message });
+    console.log({
+      success: false,
+      function: "signIn",
+      e,
+    });
+    res.status(500).json({ success: false, message: "server ERROR!!" });
   }
 };
 

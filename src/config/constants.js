@@ -14,3 +14,8 @@ export const EMAIL_EXISTING_ML_MESSAGE = {
     ar: "تم استخدام هذا الرقم او البريد الإلكتروني",
 };
 
+export const EMAIL_NOT_EXISTING_ML_MESSAGE = {
+    en: "This email not exist",
+    fr: "Cet e-mail n'existe pas",
+    ar: "هذا البريد الإلكتروني غير موجود",
+};
