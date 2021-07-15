@@ -59,7 +59,7 @@ export const getProfile = async (req, res) => {
   const id = req.params.id;
   try {
     const user = await User.findById(id);
-    user.hashPassword = undefined; // hide sensitive data
+    user.password = undefined; // hide sensitive data
     return res.status(200).json({ success: true, user });
   } catch (error) {
     return res.status(400).json({ success: false, message: 'user not found' });
