@@ -11,7 +11,6 @@ import mongoose from 'mongoose';
 import { debug, mongoUrl } from './config/index';
 import jwt from './middlewares/jwt';
 
- console.log(mongoUrl);
  /**
   * App Variables
   */
