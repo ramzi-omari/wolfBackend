@@ -11,7 +11,7 @@ export const getAllUser = async (req, res) => {
     if (users) {
       return res.status(200).json({ users: usersEdited });
     }
-    else{
+    else {
       return [];
     }
   } catch (error) {
@@ -77,15 +77,15 @@ export const editProfile = async (req, res) => {
   try {
     const user = await User.findOne({ email: profile.email });
     // update user
-    user.firstName = profile.firstName || user.firstName;
-    user.lastName = profile.lastName || user.lastName;
+    user.first_name = profile.first_name || user.first_name;
+    user.last_name = profile.last_name || user.last_name;
+    user.birthDate = profile.birthDate || user.birthDate;
     user.phone = profile.phone || user.phone;
-    user.address = profile.address || user.address;
     user.city = profile.city || user.city;
-    user.profilePictureUrl = profile.profilePictureUrl || user.profilePictureUrl;
+    user.description = profile.description || user.description;
+    //user.profilePictureUrl = profile.profilePictureUrl || user.profilePictureUrl;
     user.password = profile.password || user.password;
     const savedUser = await user.save();
-    savedUser.hashPassword = undefined;
     savedUser.password = undefined;
     return res.status(200).json({ success: true, user: savedUser });
   } catch (error) {
@@ -115,3 +115,36 @@ export const validateUser = async (req, res, next) => {
     return res.status(500).json({ success: false, message: error });
   }
 }
+
+/// @route user/
+/// @desc POST create a new user
+/// @access USER
+export const editProfileUser = async (req, res) => {
+  try {
+    const profile = req.body;
+
+    if (!profile)
+      return res.status(400).json({ success: false, message: 'profile undefined' });
+
+    const user = await User.findOne({ _id: req.user._id });
+    // update user
+    user.first_name = profile.first_name || user.first_name;
+    user.last_name = profile.last_name || user.last_name;
+    user.birthDate = profile.birthDate || user.birthDate;
+    user.phone = profile.phone || user.phone;
+    user.city = profile.city || user.city;
+    user.description = profile.description || user.description;
+    //user.profilePictureUrl = profile.profilePictureUrl || user.profilePictureUrl;
+    user.password = profile.password || user.password;
+
+    const savedUser = await user.save();
+
+    savedUser.password = undefined;
+
+    return res.status(200).json({ success: true, user: savedUser });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: error });
+  }
+};

@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     unique: true,
   },
   birthDate: Date,
-  city: Number,
+  city: String,
   phone: {
     type: String,
   },
