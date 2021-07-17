@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   editProfileUser,
-  getProfile,
+  getMyProfile,
 } from '../controllers/users';
 
 const userRouter = Router();
@@ -10,7 +10,7 @@ const userRouter = Router();
 
 // user profile
 
-userRouter.get('/:id', getProfile);
+userRouter.get('/', getMyProfile);
 userRouter.put('/',editProfileUser);
 
 export default userRouter;

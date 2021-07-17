@@ -117,7 +117,7 @@ export const validateUser = async (req, res, next) => {
 }
 
 /// @route user/
-/// @desc POST create a new user
+/// @desc put create a new user
 /// @access USER
 export const editProfileUser = async (req, res) => {
   try {
@@ -146,5 +146,20 @@ export const editProfileUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: error });
+  }
+};
+
+/// @route user/
+/// @desc get a user by id
+/// @access USER
+export const getMyProfile = async (req, res) => {
+  const id = req.user._id;
+  try {
+    const user = await User.findById(id);
+    user.password = undefined;
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: 'error getting the user' });
   }
 };
