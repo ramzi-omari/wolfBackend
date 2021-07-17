@@ -13,7 +13,7 @@ const JournalSchema = new Schema({
   },
   concerned_type:[{
       type: String,
-      enum: [TYPE_USERS],
+      enum: TYPE_USERS,
   }
     ]
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }});
