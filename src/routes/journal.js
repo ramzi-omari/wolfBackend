@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { addPublication } from '../controllers/journal';
+import { addPublication, GetPublications } from '../controllers/journal';
 
 const journalRouter = Router();
 
-journalRouter.post('/add', addPublication)
+journalRouter.post('/add', addPublication);
+journalRouter.get('/', GetPublications);
 
 export default journalRouter;

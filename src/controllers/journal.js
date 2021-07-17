@@ -1,9 +1,8 @@
-/// @route POST publication/add
-/// @desc add a publication
-
 import { MISSING_REQUIRED_FIELDS, TYPE_USERS } from "../config/constants";
 import Journal from "../models/journal";
 
+/// @route POST publication/add
+/// @desc add a publication
 /// @access User
 export const addPublication = async (req, res) => {
     try {
@@ -31,8 +30,25 @@ export const addPublication = async (req, res) => {
 
         const publication = await newPublication.save();
 
-        return res.status(200).json({ message: "success", publication });
+        return res.status(200).json({ success: true, publication });
     } catch (error) {
         return res.status(500).json({ message: error });
+    }
+}
+
+
+/// @route GET publication/
+/// @desc get a publications
+/// @access User
+export const GetPublications = async (req, res)=>{
+    try {
+        const typeUser = req.user.type;
+
+        const publications = await Journal.find({concerned_type : {$in: typeUser}})
+
+        return res.status(200).json({ success: true, publications });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({});
     }
 }
