@@ -40,15 +40,53 @@ export const addPublication = async (req, res) => {
 /// @route GET publication/
 /// @desc get a publications
 /// @access User
-export const GetPublications = async (req, res)=>{
+export const GetPublications = async (req, res) => {
     try {
         const typeUser = req.user.type;
 
-        const publications = await Journal.find({concerned_type : {$in: typeUser}})
+        const publications = await Journal.find({ concerned_type: { $in: typeUser } })
 
         return res.status(200).json({ success: true, publications });
     } catch (error) {
         console.log(error);
         return res.status(500).json({});
+    }
+}
+
+
+/// @route put publication/like
+/// @desc add like to publications
+/// @access User
+export const LikePublication = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.id;
+
+        const publication = await Journal.findById(id);
+
+        if (!publication) {
+            return res.status(400).json({ success: false, message: 'Publication not found' })
+        }
+
+        if (publication.like.includes(userId)) {
+            const index = publication.like.indexOf(userId);
+            if (index > -1) {
+                publication.like.splice(index, 1);
+            }
+        }
+        else {
+            publication.like.push(userId);
+        }
+
+        publication.nbr_like = publication.like.length;
+
+        const savedPublication = await publication.save();
+        return res.status(200).json({ success: true, publication: savedPublication });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "server error"
+        });
     }
 }

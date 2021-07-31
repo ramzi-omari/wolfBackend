@@ -8,15 +8,31 @@ const JournalSchema = new Schema({
     required: true
   },
   publisher: {
-      type: Schema.Types.ObjectId,
-      ref:'Users'
+    type: Schema.Types.ObjectId,
+    ref: 'Users'
   },
-  concerned_type:[{
-      type: String,
-      enum: TYPE_USERS,
+  concerned_type: [{
+    type: String,
+    enum: TYPE_USERS,
   }
-    ]
-}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }});
+  ],
+  from_admin: {
+    type: Boolean,
+    default: true
+  },
+  comment: [{
+    content: String,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'Users'
+    }
+  }],
+  like: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Users'
+  }],
+  nbr_like: Number,
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 const Journal = mongoose.model('Journals', JournalSchema);
 export default Journal;
