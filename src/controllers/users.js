@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { TYPE_USERS } from '../config/constants';
 import User from '../models/users';
 
 /// @route user/
@@ -158,6 +159,30 @@ export const getMyProfile = async (req, res) => {
     const user = await User.findById(id);
     user.password = undefined;
     return res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: 'error getting the user' });
+  }
+};
+
+/// @route user/type/:type
+/// @desc get a user by type
+/// @access USER
+export const getUsersByType = async (req, res) => {
+  try {
+    const type = req.params.type;
+    if(!TYPE_USERS.includes(type)){
+      return res.status(418).json({
+        status: false,
+        message: "user type error"
+      })
+    }
+    const users = await User.find({ type });
+    const userResponse = users.map((user) => {
+      user.password = undefined;
+      return user;
+    })
+    return res.status(200).json({ success: true, users: userResponse });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: 'error getting the user' });

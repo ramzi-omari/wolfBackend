@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   editProfileUser,
   getMyProfile,
+  getUsersByType,
 } from '../controllers/users';
 
 const userRouter = Router();
@@ -12,5 +13,6 @@ const userRouter = Router();
 
 userRouter.get('/', getMyProfile);
 userRouter.put('/',editProfileUser);
+userRouter.get('/type/:type',getUsersByType);
 
 export default userRouter;
