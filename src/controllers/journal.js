@@ -45,6 +45,7 @@ export const GetPublications = async (req, res) => {
         const typeUser = req.user.type;
 
         const publications = await Journal.find({ concerned_type: { $in: typeUser } })
+            .populate('publisher', 'first_name last_name profilePictureUrl')
 
         return res.status(200).json({ success: true, publications });
     } catch (error) {
