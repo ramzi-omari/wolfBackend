@@ -4,8 +4,11 @@ export const ENTREPRISE = "ENTREPRISE";
 export const TYPE_USERS = [INVESTOR, CONSULTANT, ENTREPRISE]
 
 //error messages
-export const MISSING_REQUIRED_FIELDS = "MISSING_REQUIRED_FIELDS"
+export const MISSING_REQUIRED_FIELDS = "MISSING_REQUIRED_FIELDS";
 
+//chat
+export const RECEIVER = "RECEIVER";
+export const SENDER = "SENDER";
 
 //ML messages
 export const EMAIL_EXISTING_ML_MESSAGE = {
