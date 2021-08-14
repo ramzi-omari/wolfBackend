@@ -28,3 +28,9 @@ export const UNAUTHORIZED_ACCEESS_ML_MESSAGE = {
     fr: "accès non autorisé",
     ar: "دخول غير مسموح",
 };
+
+export const CONVERSATION_ALREADY_EXIST = {
+    en: "conversation already exist",
+    fr: "la conversation existe déjà",
+    ar: "المحادثة موجودة"
+}
