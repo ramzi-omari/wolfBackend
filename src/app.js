@@ -7,9 +7,11 @@
  import cors from 'cors'
 import mongoose from 'mongoose';
  import passport from 'passport';
+ import socket from 'socket.io';
  import routes from './routes';
 import { debug, mongoUrl } from './config/index';
 import jwt from './middlewares/jwt';
+import socketEvent from './helpers/socketEvent';
 
  /**
   * App Variables
@@ -58,7 +60,12 @@ import jwt from './middlewares/jwt';
  /**
   * Server Activation
   */
- app.listen(port, () => {
+  const server = app.listen(port, () => {
    console.log(`Listening to requests on http://${host}:${port}`);
  });
  
+/**
+ * socket io
+ */
+ const io = socket(server);
+socketEvent(io);
