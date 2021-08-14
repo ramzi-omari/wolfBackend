@@ -4,8 +4,11 @@ export const ENTREPRISE = "ENTREPRISE";
 export const TYPE_USERS = [INVESTOR, CONSULTANT, ENTREPRISE]
 
 //error messages
-export const MISSING_REQUIRED_FIELDS = "MISSING_REQUIRED_FIELDS"
+export const MISSING_REQUIRED_FIELDS = "MISSING_REQUIRED_FIELDS";
 
+//chat
+export const RECEIVER = "RECEIVER";
+export const SENDER = "SENDER";
 
 //ML messages
 export const EMAIL_EXISTING_ML_MESSAGE = {
@@ -25,3 +28,9 @@ export const UNAUTHORIZED_ACCEESS_ML_MESSAGE = {
     fr: "accès non autorisé",
     ar: "دخول غير مسموح",
 };
+
+export const CONVERSATION_ALREADY_EXIST = {
+    en: "conversation already exist",
+    fr: "la conversation existe déjà",
+    ar: "المحادثة موجودة"
+}

@@ -49,6 +49,10 @@ const UserSchema = new Schema({
     type: String,
     enum: TYPE_USERS,
     required: true,
+  },
+  wallet:{
+    type: Number,
+    default: 0,
   }
 
 }, {
