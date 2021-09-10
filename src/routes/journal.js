@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { addPublication, CommentPublication, GetPublications, LikePublication } from '../controllers/journal';
+import { CommentPublication } from '../controllers/comment';
+import { addPublication, GetPublications, LikePublication } from '../controllers/journal';
 
 const journalRouter = Router();
 
