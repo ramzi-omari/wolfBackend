@@ -2,7 +2,7 @@ import { MISSING_REQUIRED_FIELDS } from "../config/constants";
 import Journal from "../models/journal";
 import Comment from "../models/comment";
 
-/// @route put publication/like
+/// @route put publication/comment
 /// @desc add comment to publications
 /// @access User
 export const CommentPublication = async (req, res) => {
@@ -39,7 +39,7 @@ export const CommentPublication = async (req, res) => {
     }
 }
 
-/// @route put publication/like
+/// @route put publication/comment/edit
 /// @desc Edit comment to publications
 /// @access User
 export const EditCommentPublication = async (req, res) => {
@@ -71,7 +71,7 @@ export const EditCommentPublication = async (req, res) => {
     }
 }
 
-/// @route put publication/like
+/// @route delete publication/delete/:id
 /// @desc delete comment to publications
 /// @access User
 export const DeleteCommentFromPublication = async (req, res) => {
@@ -99,3 +99,28 @@ export const DeleteCommentFromPublication = async (req, res) => {
     }
 }
 
+
+/// @route get publication/comments
+/// @desc delete comment to publications
+/// @access User
+export const GetCommentByPublication = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.id;
+
+        if (!id) {
+            return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS })
+        }
+
+        const comments = await Comment.find({publication: id, user:userId });
+
+        return res.status(200).json({ success: true, comments });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "server error"
+        });
+    }
+}
