@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { CommentPublication, EditCommentPublication } from '../controllers/comment';
+import { CommentPublication, DeleteCommentFromPublication, EditCommentPublication } from '../controllers/comment';
 import { addPublication, GetPublications, LikePublication } from '../controllers/journal';
 
 const journalRouter = Router();
@@ -9,5 +9,6 @@ journalRouter.get('/', GetPublications);
 journalRouter.put('/like/:id', LikePublication);
 journalRouter.put('/comment', CommentPublication);
 journalRouter.put('/comment/edit', EditCommentPublication);
+journalRouter.delete('/comment/delete/:id', DeleteCommentFromPublication);
 
 export default journalRouter;

@@ -70,3 +70,32 @@ export const EditCommentPublication = async (req, res) => {
         });
     }
 }
+
+/// @route put publication/like
+/// @desc delete comment to publications
+/// @access User
+export const DeleteCommentFromPublication = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.id;
+
+        if (!id) {
+            return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS })
+        }
+
+        const DeleteComment = await Comment.findOneAndDelete({_id: id, user:userId });
+
+        if (!DeleteComment) {
+            return res.status(400).json({ success: false, message: 'Comment not found to be deleted' });
+        }
+        return res.status(200).json({ success: true, message: "comment was deleted succesfully" });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "server error"
+        });
+    }
+}
+
