@@ -20,13 +20,6 @@ const JournalSchema = new Schema({
     type: Boolean,
     default: true
   },
-  comment: [{
-    content: String,
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'Users'
-    }
-  }],
   like: [{
     type: Schema.Types.ObjectId,
     ref: 'Users'
