@@ -1,6 +1,5 @@
 import { MISSING_REQUIRED_FIELDS, TYPE_USERS } from "../config/constants";
 import Journal from "../models/journal";
-import Comment from "../models/comment";
 
 /// @route POST publication/add
 /// @desc add a publication
