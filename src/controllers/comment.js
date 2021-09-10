@@ -23,7 +23,6 @@ export const CommentPublication = async (req, res) => {
         const newComment = new Comment ({
             comment,
             user: userId,
-            date : Date.now(),
             publication: id,
         })
     
