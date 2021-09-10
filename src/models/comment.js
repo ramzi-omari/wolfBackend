@@ -11,10 +11,6 @@ const CommentSchema = new Schema({
         ref: 'Users',
         required: true,
     },
-    date: {
-        type: Date,
-        required: true
-    },
     publication: {
         type: Schema.Types.ObjectId,
         ref: 'Journal',
