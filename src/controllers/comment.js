@@ -52,21 +52,15 @@ export const EditCommentPublication = async (req, res) => {
             return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS })
         }
 
-        const comment = await Journal.findById(id);
+        const commentFromDB = await Comment.findOne({_id: id, user:userId });
 
-        if (!publication) {
-            return res.status(400).json({ success: false, message: 'Publication not found' })
+        if (!commentFromDB) {
+            return res.status(400).json({ success: false, message: 'Comment not found' });
         }
 
-        const newComment = new Comment ({
-            comment,
-            user: userId,
-            date : Date.now(),
-            publication: id,
-        })
-    
-
-        const savedComment = await newComment.save();
+        commentFromDB.comment = comment;
+         
+        const savedComment = await commentFromDB.save();
         return res.status(200).json({ success: true, comment: savedComment });
 
     } catch (error) {
