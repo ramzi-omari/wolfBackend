@@ -61,9 +61,37 @@ export const GetMyTransactions = async (req, res, next) => {
 
     } catch (error) {
         console.log("error when GetMyTransactions", error);
-        return res.status(500).json({ 
-            success: false, 
-            message: 'server error', 
+        return res.status(500).json({
+            success: false,
+            message: 'server error',
+        });
+    }
+}
+
+export const GetTransactionById = async (req, res, next) => {
+    try {
+
+        const { id } = req.params;
+        const userId = req.user.id;
+
+        const transactions = await transaction.findOne({
+            $or: [
+                { to: userId },
+                { from: userId },
+            ],
+            _id: id,
+        });
+
+        return res.status(200).json({
+            success: true,
+            transaction: transactions,
+        });
+
+    } catch (error) {
+        console.log("error when GetMyTransactions", error);
+        return res.status(500).json({
+            success: false,
+            message: 'server error',
         });
     }
 }
