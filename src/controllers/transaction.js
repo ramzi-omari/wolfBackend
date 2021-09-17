@@ -88,7 +88,7 @@ export const GetTransactionById = async (req, res, next) => {
         });
 
     } catch (error) {
-        console.log("error when GetMyTransactions", error);
+        console.log("error when GetTransactionById", error);
         return res.status(500).json({
             success: false,
             message: 'server error',
