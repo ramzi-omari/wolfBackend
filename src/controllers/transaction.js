@@ -1,4 +1,4 @@
-import { AVAILABLE_TRANSACTION_STATUS, MISSING_REQUIRED_FIELDS } from "../config/constants";
+import { AVAILABLE_TRANSACTION_STATUS, CANCELED, MISSING_REQUIRED_FIELDS, PENDING } from "../config/constants";
 import transaction from "../models/transaction";
 import User from "../models/users";
 
@@ -89,6 +89,45 @@ export const GetTransactionById = async (req, res, next) => {
 
     } catch (error) {
         console.log("error when GetTransactionById", error);
+        return res.status(500).json({
+            success: false,
+            message: 'server error',
+        });
+    }
+}
+
+export const CancelTransaction = async (req, res, next) => {
+    try {
+
+        const { id } = req.params;
+        const userId = req.user.id;
+
+        const transactions = await transaction.findOne({
+            $or: [
+                { to: userId },
+                { from: userId },
+            ],
+            _id: id,
+        });
+
+        if (transactions.status !== PENDING) {
+            return res.status(422).json({
+                status: false,
+                message: `Transaction status is ${transactions.status}, you can't cancel`,
+            })
+        }
+
+        transactions.status = CANCELED;
+
+        const savedTransactions= await transactions.save()
+
+        return res.status(200).json({
+            success: true,
+            transaction: savedTransactions,
+        });
+
+    } catch (error) {
+        console.log("error when CancelTransaction", error);
         return res.status(500).json({
             success: false,
             message: 'server error',
