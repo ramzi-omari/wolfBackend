@@ -29,8 +29,9 @@ const socketEvent = async (io) => {
     ///listen from chat event
     socket.on('chat', async (data) => {
       try {
-        const { message, room } = data;
-        const { content, sendBy, id_conv } = message
+        const { content, sendBy, id_conv } = data;
+        const message = data;
+        const room = id_conv;
         const newMessage = new Messages({ content: content, sendBy: sendBy });
         const savedMessage = await newMessage.save();
 
