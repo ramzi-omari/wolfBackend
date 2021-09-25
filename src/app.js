@@ -8,7 +8,7 @@ import cors from 'cors'
 import mongoose from 'mongoose';
 import passport from 'passport';
 import socket from 'socket.io';
-import routerBro from '../aminBro';
+import routerBro from '../src/routes/admin.router';
 import routes from './routes';
 import { debug, mongoUrl } from './config/index';
 import jwt from './middlewares/jwt';
@@ -25,9 +25,7 @@ const port = process.env.PORT || 8000;
  *  App Configuration
  */
 app.disable('x-powered-by');
-app.use(bodyParser.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 app.use('/uploads', express.static('uploads'));
 
@@ -57,6 +55,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', routes);
 app.use('/admin', routerBro)
+app.use(bodyParser.json());
 
 /**
  * Server Activation
