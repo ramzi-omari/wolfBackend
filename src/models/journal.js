@@ -24,7 +24,10 @@ const JournalSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Users'
   }],
-  nbr_like: Number,
+  nbr_like:{
+    type: Number,
+    default: 0,
+  },
   image: String,
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
