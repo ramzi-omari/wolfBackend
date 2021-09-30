@@ -32,6 +32,7 @@ const JournalSchema = new Schema({
     ref: 'Users'
   }],
   nbr_like: Number,
+  image: String,
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 const Journal = mongoose.model('Journals', JournalSchema);
