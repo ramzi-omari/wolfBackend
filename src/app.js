@@ -67,5 +67,5 @@ const server = app.listen(port, () => {
 /**
  * socket io
  */
-const io = socket(server);
+const io = socket(server, { origins: '*:*' });
 socketEvent(io);
