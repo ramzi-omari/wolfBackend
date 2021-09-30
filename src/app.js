@@ -34,7 +34,7 @@ if (debug) {
   mongoose.set('debug', true);
 }
 mongoose.promise = global.Promise;
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: true});
 // make a connection to mongodb
 const connection = mongoose.connection;
 connection.once('open', () => console.log('MongoDB --  database connection established successfully!'));

@@ -7,6 +7,7 @@ import authRouter from './authentication'
 import journalRouter from './journal';
 import imageRouter from './upload_images';
 import ConversationsRouter from './conversation';
+import transactionRouter from './transaction';
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use('/users', authenticate, userRouter);
 router.use('/publication', authenticate, journalRouter);
 router.use('/upload', authenticate, imageRouter);
 router.use('/conversation', authenticate, ConversationsRouter);
+router.use('/transaction', authenticate, transactionRouter);
 
 export default router;

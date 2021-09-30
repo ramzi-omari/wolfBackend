@@ -3,6 +3,17 @@ export const CONSULTANT = "CONSULTANT";
 export const ENTREPRISE = "ENTREPRISE";
 export const TYPE_USERS = [INVESTOR, CONSULTANT, ENTREPRISE]
 
+export const PENDING = 'PENDING';
+export const FINISHED = 'FINISHED';
+export const REFUSED = 'REFUSED';
+export const CANCELED = 'CANCELED';
+export const AVAILABLE_TRANSACTION_STATUS = [
+PENDING,
+FINISHED,
+REFUSED,
+CANCELED,
+]
+
 //error messages
 export const MISSING_REQUIRED_FIELDS = "MISSING_REQUIRED_FIELDS";
 
