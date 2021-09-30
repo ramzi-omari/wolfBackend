@@ -112,7 +112,7 @@ export const GetCommentByPublication = async (req, res) => {
             return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS })
         }
 
-        const comments = await Comment.find({publication: id });
+        const comments = await Comment.find({publication: id }).populate('user', 'first_name last_name profilePictureUrl');
 
         return res.status(200).json({ success: true, comments });
 
