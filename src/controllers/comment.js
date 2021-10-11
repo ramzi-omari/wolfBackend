@@ -28,7 +28,8 @@ export const CommentPublication = async (req, res) => {
     
 
         const savedComment = await newComment.save();
-        return res.status(200).json({ success: true, comment: savedComment });
+        const myComment = await Comment.find({_id: savedComment._id }).populate('user', 'first_name last_name profilePictureUrl');
+        return res.status(200).json({ success: true, comment: myComment });
 
     } catch (error) {
         console.log(error);
@@ -51,7 +52,7 @@ export const EditCommentPublication = async (req, res) => {
             return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS })
         }
 
-        const commentFromDB = await Comment.findOne({_id: id, user:userId });
+        const commentFromDB = await Comment.findOne({_id: id, user:userId }).populate('user', 'first_name last_name profilePictureUrl');
 
         if (!commentFromDB) {
             return res.status(400).json({ success: false, message: 'Comment not found' });

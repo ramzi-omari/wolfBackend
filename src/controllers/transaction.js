@@ -27,9 +27,13 @@ export const PostTransaction = async (req, res, next) => {
 
         const savedTransaction = await newTransaction.save();
 
+        const myTransactions = await transaction.find({ _id: savedTransaction._id })
+            .populate('from', 'first_name last_name profilePictureUrl')
+            .populate('to', 'first_name last_name profilePictureUrl');
+
         return res.status(200).json({
             success: true,
-            transaction: savedTransaction
+            transaction: myTransactions,
         });
 
     } catch (error) {
@@ -52,7 +56,9 @@ export const GetMyTransactions = async (req, res, next) => {
             status: {
                 $in: status,
             },
-        });
+        })
+            .populate('from', 'first_name last_name profilePictureUrl')
+            .populate('to', 'first_name last_name profilePictureUrl');
 
         return res.status(200).json({
             success: true,
@@ -80,7 +86,9 @@ export const GetTransactionById = async (req, res, next) => {
                 { from: userId },
             ],
             _id: id,
-        });
+        })
+            .populate('from', 'first_name last_name profilePictureUrl')
+            .populate('to', 'first_name last_name profilePictureUrl');;
 
         return res.status(200).json({
             success: true,
@@ -108,7 +116,9 @@ export const CancelTransaction = async (req, res, next) => {
                 { from: userId },
             ],
             _id: id,
-        });
+        })
+            .populate('from', 'first_name last_name profilePictureUrl')
+            .populate('to', 'first_name last_name profilePictureUrl');;
 
         if (transactions.status !== PENDING) {
             return res.status(422).json({
@@ -119,7 +129,7 @@ export const CancelTransaction = async (req, res, next) => {
 
         transactions.status = CANCELED;
 
-        const savedTransactions= await transactions.save()
+        const savedTransactions = await transactions.save()
 
         return res.status(200).json({
             success: true,
