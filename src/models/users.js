@@ -50,11 +50,6 @@ const UserSchema = new Schema({
     enum: TYPE_USERS,
     required: true,
   },
-  wallet:{
-    type: Number,
-    default: 0,
-  }
-
 }, {
   collection: 'Users',
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
