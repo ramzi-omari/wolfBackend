@@ -120,6 +120,13 @@ export const CancelTransaction = async (req, res, next) => {
             .populate('from', USER_INFO_POPULATE)
             .populate('to', USER_INFO_POPULATE);;
 
+          if(!transactions){
+            return res.status(400).json({
+                status: false,
+                message: `Transaction not exist`,
+            })
+          }
+
         if (transactions.status !== PENDING) {
             return res.status(422).json({
                 status: false,
