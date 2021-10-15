@@ -1,4 +1,4 @@
-import { MISSING_REQUIRED_FIELDS, TYPE_USERS } from "../config/constants";
+import { MISSING_REQUIRED_FIELDS, TYPE_USERS, USER_INFO_POPULATE } from "../config/constants";
 import Journal from "../models/journal";
 
 /// @route POST publication/add
@@ -45,7 +45,7 @@ export const GetPublications = async (req, res) => {
         const typeUser = req.user.type;
 
         const publications = await Journal.find({ concerned_type: { $in: typeUser } })
-            .populate('publisher', 'first_name last_name profilePictureUrl')
+            .populate('publisher', USER_INFO_POPULATE)
 
         return res.status(200).json({ success: true, publications });
     } catch (error) {
