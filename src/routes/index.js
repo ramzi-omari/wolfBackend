@@ -10,6 +10,7 @@ import ConversationsRouter from './conversation';
 import transactionRouter from './transaction';
 import passwordRouter from './password';
 import walletRouter from './wallet';
+import creditRouter from './credit';
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router.use('/publication', authenticate, journalRouter);
 router.use('/upload', authenticate, imageRouter);
 router.use('/conversation', authenticate, ConversationsRouter);
 router.use('/transaction', authenticate, transactionRouter);
+router.use('/credit', authenticate, creditRouter);
 router.use('/password', authenticate, passwordRouter);
 router.use('/wallet', authenticate, walletRouter);
 
