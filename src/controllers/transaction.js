@@ -1,4 +1,4 @@
-import { AVAILABLE_TRANSACTION_STATUS, CANCELED, MISSING_REQUIRED_FIELDS, PENDING } from "../config/constants";
+import { AVAILABLE_TRANSACTION_STATUS, CANCELED, MISSING_REQUIRED_FIELDS, PENDING, USER_INFO_POPULATE } from "../config/constants";
 import transaction from "../models/transaction";
 import User from "../models/users";
 
@@ -28,8 +28,8 @@ export const PostTransaction = async (req, res, next) => {
         const savedTransaction = await newTransaction.save();
 
         const myTransactions = await transaction.find({ _id: savedTransaction._id })
-            .populate('from', 'first_name last_name profilePictureUrl')
-            .populate('to', 'first_name last_name profilePictureUrl');
+            .populate('from', USER_INFO_POPULATE)
+            .populate('to', USER_INFO_POPULATE);
 
         return res.status(200).json({
             success: true,
@@ -57,8 +57,8 @@ export const GetMyTransactions = async (req, res, next) => {
                 $in: status,
             },
         })
-            .populate('from', 'first_name last_name profilePictureUrl')
-            .populate('to', 'first_name last_name profilePictureUrl');
+            .populate('from', USER_INFO_POPULATE)
+            .populate('to', USER_INFO_POPULATE);
 
         return res.status(200).json({
             success: true,
@@ -87,8 +87,8 @@ export const GetTransactionById = async (req, res, next) => {
             ],
             _id: id,
         })
-            .populate('from', 'first_name last_name profilePictureUrl')
-            .populate('to', 'first_name last_name profilePictureUrl');;
+            .populate('from', USER_INFO_POPULATE)
+            .populate('to', USER_INFO_POPULATE);;
 
         return res.status(200).json({
             success: true,
@@ -117,8 +117,8 @@ export const CancelTransaction = async (req, res, next) => {
             ],
             _id: id,
         })
-            .populate('from', 'first_name last_name profilePictureUrl')
-            .populate('to', 'first_name last_name profilePictureUrl');;
+            .populate('from', USER_INFO_POPULATE)
+            .populate('to', USER_INFO_POPULATE);;
 
         if (transactions.status !== PENDING) {
             return res.status(422).json({

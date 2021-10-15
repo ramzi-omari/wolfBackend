@@ -1,4 +1,4 @@
-import { MISSING_REQUIRED_FIELDS } from "../config/constants";
+import { MISSING_REQUIRED_FIELDS, USER_INFO_POPULATE } from "../config/constants";
 import Journal from "../models/journal";
 import Comment from "../models/comment";
 
@@ -28,7 +28,7 @@ export const CommentPublication = async (req, res) => {
     
 
         const savedComment = await newComment.save();
-        const myComment = await Comment.find({_id: savedComment._id }).populate('user', 'first_name last_name profilePictureUrl');
+        const myComment = await Comment.find({_id: savedComment._id }).populate('user', USER_INFO_POPULATE);
         return res.status(200).json({ success: true, comment: myComment });
 
     } catch (error) {
@@ -52,7 +52,7 @@ export const EditCommentPublication = async (req, res) => {
             return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS })
         }
 
-        const commentFromDB = await Comment.findOne({_id: id, user:userId }).populate('user', 'first_name last_name profilePictureUrl');
+        const commentFromDB = await Comment.findOne({_id: id, user:userId }).populate('user', USER_INFO_POPULATE);
 
         if (!commentFromDB) {
             return res.status(400).json({ success: false, message: 'Comment not found' });
@@ -113,7 +113,7 @@ export const GetCommentByPublication = async (req, res) => {
             return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS })
         }
 
-        const comments = await Comment.find({publication: id }).populate('user', 'first_name last_name profilePictureUrl');
+        const comments = await Comment.find({publication: id }).populate('user', USER_INFO_POPULATE);
 
         return res.status(200).json({ success: true, comments });
 

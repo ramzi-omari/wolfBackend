@@ -9,6 +9,7 @@ import imageRouter from './upload_images';
 import ConversationsRouter from './conversation';
 import transactionRouter from './transaction';
 import passwordRouter from './password';
+import walletRouter from './wallet';
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use('/upload', authenticate, imageRouter);
 router.use('/conversation', authenticate, ConversationsRouter);
 router.use('/transaction', authenticate, transactionRouter);
 router.use('/password', authenticate, passwordRouter);
+router.use('/wallet', authenticate, walletRouter);
 
 export default router;
