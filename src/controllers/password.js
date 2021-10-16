@@ -1,10 +1,15 @@
-import { TYPE_USERS } from '../config/constants';
 import Users from '../models/users'
 
 export const checkPassword = async (req, res, next) => {
     try {
         const { password } = req.body;
 
+        if(!password){
+            return res.status(400).json({
+                status: false,
+                message: `password is required`,
+            });
+        }
         const user = await Users.findOne({ _id: req.user._id });
 
         if (user.comparePassword(password)) {
