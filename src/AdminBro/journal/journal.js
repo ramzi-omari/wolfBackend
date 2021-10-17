@@ -23,7 +23,8 @@ export const journalResources =
             },
             image: {
               components: {
-                edit: AdminBro.bundle('../journal/components/uplod_image')
+                edit: AdminBro.bundle('../journal/components/uplod_image'),
+                create: AdminBro.bundle('../journal/components/uplod_image'),
               }
             },
             publisher: {isVisible: false},

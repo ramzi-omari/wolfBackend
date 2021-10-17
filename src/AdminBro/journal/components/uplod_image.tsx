@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { BasePropertyProps, } from 'admin-bro'
-import { Label, Box, DropZone, DropZoneProps, DropZoneItem } from '@admin-bro/design-system'
+import { Label, Box, DropZone, DropZoneProps, DropZoneItem, Input } from '@admin-bro/design-system'
 
 const Edit: React.FC<BasePropertyProps> = (props) => {
   const { property, onChange, record } = props
+  const [uploadedPhoto, setUploadedPhoto] = useState()
+    // useEffect(() => {
+    //   setUploadedPhoto()
+    // }, [props])
 
+  
   const getBase64 = (file, cb)=> {
     let reader = new FileReader();
     reader.readAsDataURL(file);
@@ -16,14 +21,13 @@ const Edit: React.FC<BasePropertyProps> = (props) => {
         console.log('Error: ', error);
     };
   }
-  let uploadedPhoto;
+ 
 
   const handleDropZoneChange: DropZoneProps['onChange'] = (files) => {
-    uploadedPhoto =  getBase64(files[0], (result) => {
-      console.log(result);
+    getBase64(files[0], (result) => {
+      setUploadedPhoto(result)
       return result;
  })
-    console.log(uploadedPhoto);
     
     onChange(property.name, uploadedPhoto)
   }
@@ -37,6 +41,7 @@ const Edit: React.FC<BasePropertyProps> = (props) => {
     <Box marginBottom="xxl">
       <Label>{property.label}</Label>
       <DropZone onChange={handleDropZoneChange}/>
+      <Input id='image' className='imageB64' value = {uploadedPhoto}></Input>
     </Box>
   )
 }
