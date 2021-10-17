@@ -6,9 +6,8 @@ export const journalResources =
     {
         resource: Journal,
         options: {
-          
             navigation:{
-            icon: 'application--web',
+            icon: 'Add',
           
         },
         listProperties: ['content','concerned_type', 'nbr_like' ],

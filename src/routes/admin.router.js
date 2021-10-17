@@ -7,6 +7,7 @@ import Journals from '../models/journal';
 import Users from '../models/users'
 import { usersResources } from '../AdminBro/users/users';
 import { transactionResources } from '../AdminBro/transaction/transaction';
+import { creditResources } from '../AdminBro/credit/credit';
 
 AdminBro.registerAdapter(AdminBroMongoose)
 
@@ -16,6 +17,7 @@ const adminBro = new AdminBro({
     usersResources,
     journalResources,
     transactionResources,
+    creditResources,
   ],
   dashboard: {
     handler: async () => {
@@ -27,7 +29,9 @@ const adminBro = new AdminBro({
     translations: {
       labels: {
         Users: 'Utilisateurs',
-        Journal: 'Publications'
+        Journal: 'Publications',
+        Transaction: 'Transactions',
+        Credit: 'Demande de credit',
       }
     }
   },
