@@ -18,10 +18,6 @@ const TransactioSchema = new Schema({
         type: Date,
         required: true,
     },
-    from_admin: {
-        type: Boolean,
-        default: false,
-    },
     amount: {
         type: Number,
         required: true,
