@@ -6,6 +6,7 @@ import { journalResources } from '../AdminBro/journal/journal';
 import Journals from '../models/journal';
 import Users from '../models/users'
 import { usersResources } from '../AdminBro/users/users';
+import { transactionResources } from '../AdminBro/transaction/transaction';
 
 AdminBro.registerAdapter(AdminBroMongoose)
 
@@ -14,7 +15,14 @@ const adminBro = new AdminBro({
      // journalResource,
     usersResources,
     journalResources,
+    transactionResources,
   ],
+  dashboard: {
+    handler: async () => {
+      return { some: 'output' }
+    },
+    component: AdminBro.bundle('./my-dashboard-component')
+  },
   locale: {
     translations: {
       labels: {
