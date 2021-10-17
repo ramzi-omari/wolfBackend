@@ -45,3 +45,7 @@ export const CONVERSATION_ALREADY_EXIST = {
     fr: "la conversation existe déjà",
     ar: "المحادثة موجودة"
 }
+
+
+// populate fields
+export const USER_INFO_POPULATE = 'first_name last_name profilePictureUrl';

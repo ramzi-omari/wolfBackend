@@ -1,5 +1,6 @@
 import { EMAIL_EXISTING_ML_MESSAGE, EMAIL_NOT_EXISTING_ML_MESSAGE, MISSING_REQUIRED_FIELDS } from '../config/constants';
 import Users from '../models/users';
+import Wallet from '../models/wallet';
 
 /// @route auth/signup
 /// @desc register new user
@@ -22,6 +23,8 @@ const signUp = async (req, res) => {
     const newUser = new Users({ ...req.body });
     const savedUser = await newUser.save();
     savedUser.password = undefined;
+
+    await Wallet.insertMany([{user: savedUser._id}]);
 
     res.status(200).json({ 
         success: true, 

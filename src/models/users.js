@@ -50,15 +50,12 @@ const UserSchema = new Schema({
     enum: TYPE_USERS,
     required: true,
   },
-  wallet:{
-    type: Number,
-    default: 0,
-  }
-
 }, {
   collection: 'Users',
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
+
+UserSchema.index({ first_name:1, last_name:1, phone: 1, email:1 });
 
 UserSchema.pre('save', function (next) {
   const user = this;
