@@ -19,7 +19,7 @@ switch (process.env.NODE_ENV) {
     mongoUrl = process.env.DB_URL_TEST;
     break;
   default:
-    mongoUrl = process.env.DB_URL_LOCAL || 'mongodb://localhost:27017/wolf';
+    mongoUrl = process.env.DB_URL_LOCAL;
     break;
 }
 export {mongoUrl}

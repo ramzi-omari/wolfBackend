@@ -24,11 +24,7 @@ const JournalSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Users'
   }],
-  nbr_like:{
-    type: Number,
-    default: 0,
-  },
-  image: String,
+  nbr_like: Number,
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 const Journal = mongoose.model('Journals', JournalSchema);
