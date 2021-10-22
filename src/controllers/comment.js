@@ -45,7 +45,7 @@ export const CommentPublication = async (req, res) => {
 /// @access User
 export const EditCommentPublication = async (req, res) => {
     try {
-        const { id_comment: id, comment } = req.body;
+        const { id, comment } = req.body;
         const userId = req.user.id;
 
         if (!id || !comment) {
