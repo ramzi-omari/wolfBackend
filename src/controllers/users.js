@@ -135,7 +135,7 @@ export const editProfileUser = async (req, res) => {
     user.phone = profile.phone || user.phone;
     user.city = profile.city || user.city;
     user.description = profile.description || user.description;
-    //user.profilePictureUrl = profile.profilePictureUrl || user.profilePictureUrl;
+    user.profilePictureUrl = profile.profilePictureUrl || user.profilePictureUrl;
     user.password = profile.password || user.password;
 
     const savedUser = await user.save();
