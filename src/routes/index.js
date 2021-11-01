@@ -14,7 +14,7 @@ import creditRouter from './credit';
 
 const router = Router();
 
-router.use('/admin', authenticate, onlyAdmin, adminRouter);
+router.use('/admin', adminRouter);
 router.use('/auth', authRouter);
 router.use('/users', authenticate, userRouter);
 router.use('/publication', authenticate, journalRouter);
