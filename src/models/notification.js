@@ -8,7 +8,15 @@ const NotificationSchema = new Schema({
   },
   message: {
     type: String,
-    required: true
+    required: true,
+  },
+  page: {
+    type: String,
+    required: true,
+    enum: [
+      'Wallet',
+      'Journal',
+    ]
   },
   broadcast: {
       type: Boolean,

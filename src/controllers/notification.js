@@ -1,9 +1,14 @@
+import { MISSING_REQUIRED_FIELDS } from "../config/constants";
 import Notification from "../models/notification";
 import User from "../models/users";
 
 export const PushNotificationByUser = async (req, res) => {
     try {
-        const { message, to } = req.body;
+        const { message, to, page } = req.body;
+
+        if (!message || !to || !page) {
+            return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS });
+        }
 
         const userTo = await User.findOne({ _id: to }, { password: -1 });
 
@@ -14,6 +19,7 @@ export const PushNotificationByUser = async (req, res) => {
         const newNotification = new Notification({
             message,
             to,
+            page,
         });
         const savedNotif = await newNotification.save();
 
@@ -30,11 +36,16 @@ export const PushNotificationByUser = async (req, res) => {
 
 export const PushNotificationBroadcast = async (req, res) => {
     try {
-        const { message } = req.body;
+        const { message, page } = req.body;
+
+        if (!message || !page) {
+            return res.status(400).json({ success: false, message: MISSING_REQUIRED_FIELDS });
+        }
 
         const newNotification = new Notification({
             message,
             broadcast: true,
+            page,
         });
         const savedNotif = await newNotification.save();
 
