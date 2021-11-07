@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { getMyNotification } from '../controllers/notification';
 import { searchUser } from '../controllers/search';
 import {
+  AddImageUser,
   editProfileUser,
   getMyProfile,
   getUsersByType,
@@ -18,5 +19,6 @@ userRouter.put('/',editProfileUser);
 userRouter.get('/search',searchUser);
 userRouter.get('/notification',getMyNotification);
 userRouter.get('/type/:type',getUsersByType);
+userRouter.post('/image',AddImageUser);
 
 export default userRouter;
