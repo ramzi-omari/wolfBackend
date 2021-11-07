@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { TYPE_USERS } from '../config/constants';
+import { TYPE_USERS, USER_INFO_POPULATE } from '../config/constants';
 import User from '../models/users';
 
 /// @route user/
@@ -172,7 +172,7 @@ export const getMyProfile = async (req, res) => {
 export const getUsersByType = async (req, res) => {
   try {
     const type = req.params.type;
-    if(!TYPE_USERS.includes(type)){
+    if (!TYPE_USERS.includes(type)) {
       return res.status(418).json({
         status: false,
         message: "user type error"
@@ -187,5 +187,29 @@ export const getUsersByType = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: 'error getting the user' });
+  }
+};
+
+
+/// @route user/image/:id
+/// @desc post image for a user
+/// @access USER
+export const AddImageUser = async (req, res) => {
+  try {
+    const { image } = req.body;
+
+    const users = await User.findOne({ _id: req.user.id });
+
+    if (!users) return res.status(400).json({ success: false, message: "user not exist!!" });
+
+    users.profilePictureUrl = image;
+
+    let savedUser = await users.save();
+    savedUser.password = undefined;
+
+    return res.status(200).json({ success: true, user: savedUser });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: 'error saving user image' });
   }
 };
