@@ -26,7 +26,7 @@ const port = process.env.PORT || 8000;
 app.disable('x-powered-by');
 app.use(bodyParser.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ parameterLimit: 100000,     limit: '100mb',     extended: true }));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 app.use('/uploads', express.static('uploads'));
 
